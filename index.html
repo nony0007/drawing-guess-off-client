@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drawing Guess‑Off</title>
+  <link rel="icon" href="assets/pencil.png" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/pencil.png" alt="logo" />
+        <h1>Drawing Guess‑Off</h1>
+      </div>
+      <div class="room-info">
+        <span id="roomCodeLabel"></span>
+        <button id="copyLinkBtn" class="btn small">Copy Invite Link</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- LEFT: canvas + tools -->
+      <section class="canvas-col">
+        <div class="toolbar">
+          <span>Word: <strong id="wordMask">—</strong></span>
+          <span>Time: <strong id="timer">—</strong></span>
+          <div class="tools">
+            <input type="range" id="brushSize" min="1" max="20" value="4" />
+            <button id="clearBtn" class="btn">Clear</button>
+          </div>
+        </div>
+        <canvas id="board" width="1200" height="800"></canvas>
+      </section>
+
+      <!-- RIGHT: lobby/chat/players -->
+      <section class="side-col">
+        <div id="lobby" class="card">
+          <h2>Join / Create a Room</h2>
+          <div class="row">
+            <label>Name</label>
+            <input id="nameInput" placeholder="Your name" maxlength="16" />
+          </div>
+          <div class="row">
+            <label>Room Code</label>
+            <input id="roomInput" placeholder="ABCD" maxlength="6" />
+            <button id="joinBtn" class="btn">Join</button>
+            <button id="createBtn" class="btn ghost">Create</button>
+          </div>
+          <p class="hint">Tip: share the invite link so family can join on phone/tablet/PC.</p>
+        </div>
+
+        <div id="gamePanel" class="card hidden">
+          <div class="row space-between">
+            <h2>Players</h2>
+            <button id="startBtn" class="btn">Start Game</button>
+          </div>
+          <ul id="playersList" class="list"></ul>
+          <div class="divider"></div>
+          <div class="chat">
+            <div id="chatLog" class="chat-log"></div>
+            <div class="chat-input">
+              <input id="chatInput" placeholder="Type guess or chat…" maxlength="140" />
+              <button id="sendBtn" class="btn small">Send</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Works on phone, tablet, and desktop.</span>
+      <a href="https://github.com/" target="_blank">Host on GitHub Pages</a>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
